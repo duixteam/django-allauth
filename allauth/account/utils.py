@@ -28,6 +28,8 @@ from . import signals
 from .app_settings import EmailVerificationMethod
 from . import app_settings
 from .adapter import get_adapter
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 def get_next_redirect_url(request, redirect_field_name="next"):
@@ -116,9 +118,7 @@ def perform_login(request, user, email_verification,
     elif email_verification == EmailVerificationMethod.MANDATORY:
         if not has_verified_email:
             send_email_confirmation(request, user, signup=signup)
-            return render(request,
-                          "account/verification_sent.html",
-                          {"email": user_email(user)})
+            return redirect(reverse('home'))
     # Local users are stopped due to form validation checking
     # is_active, yet, adapter methods could toy with is_active in a
     # `user_signed_up` signal. Furthermore, social users should be

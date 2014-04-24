@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans %}Confirmation e-mail sent to {{email}}.{% endblocktrans %}
+{% blocktrans %}You have been sent a confirmation email ({{email}}). Follow the intructions there to complete the signup.{% endblocktrans %}
